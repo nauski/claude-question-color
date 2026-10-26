@@ -1,0 +1,5 @@
+{
+  "name": "claude-question-color",
+  "owner": { "name": "nauski" },
+  "plugins": [{ "name": "question-color", "source": "./" }]
+}
