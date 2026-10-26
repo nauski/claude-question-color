@@ -1,9 +1,10 @@
 import type { Register } from 'claude-code'
 
-// ponytail: line heuristic, "Q:" prefix or trailing "?" outside code fences
+// ponytail: line heuristic, "Q:" prefix or a "?" ending any sentence on the
+// line, outside code fences and inline code
 export const isQuestion = (line: string) => {
-  const t = line.trim().replace(/^[>*\-#\s`]+|[`*\s]+$/g, '')
-  return t.startsWith('Q:') || t.endsWith('?')
+  const t = line.replace(/`[^`]*`/g, '').trim().replace(/^[>*\-#\s]+/, '')
+  return /^[>*\-#\s`]*Q:/.test(line) || /\?[`*_)"']*(\s|$)/.test(t)
 }
 
 type Seg = { q: boolean; text: string }
